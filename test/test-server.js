@@ -19,3 +19,14 @@ describe("index page", function() {
   });
 });
 
+describe("../dashboard.html", function() {
+    it("should exist", function() {
+      return chai
+        .request(app)
+        .get("/")
+        .then(function(res) {
+          expect(res).to.have.status(200);
+        });
+    });
+  });
+
