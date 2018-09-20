@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: mX2agSW99erkS+4hAHOE8kNytH7oMUNtaZqsqB3GUx9ABYlC6IvQ7OebXPCcAZaxToLlJPcjlKYJF+kApD34Rrf9rrluR3Ahw7zcMCA9ugFhwKU3/9S2lXwE/Xv85o17j17ihvh+5EPxrxTG1fADjdn/sIyPAvrlJPVl8zXyc8LwH/3pbbUkPZMHUJU9G6yH/RnYt94IVMG69o5tNrHxMUSWYO2IJsT4aRcuQ4GImI/1lghK8O6DOKzebhtPUkONK92kATC8W2ixHfi6vcTRFGXq1qO5kpvaKsWrdpgj55GmdWZZOjM9gGCFd8N92d4noweUAb0leIPnYE7gLnRE1KBEEEcC0W+AUmTlzZQ5TX9Nl8s6q0+ZgnvhvKINsJ9Aogj5u6U47wFY0QxmnmNYeYd7U78nldx63pM90QwPf/LPA7QZsEx1udZYvu+M1YVYkum1UwU7DzRHM79NronPDIwZSa8A64gYdqVj7Sm83uB5k/ufMmcqXL25MkL76ZyyAsCXrXQ28ead1zXCydwK6lcT2JqcieRMi/ZcSep7PWYciCPoCES/SnF85QHSTFYpJ/CdjJtvN1SLSgBTv1eAYz9+SW2nT2CY2mz+BnIXeWWcvBi651lZA85IX04EzP0+WL9FOtnq02MNnk1YDo6VZoRRyovbqSfIf15FZKk1M/0=
+  app: quiet-wildwood-91303
+  on:
+    repo: sbeyerjr/Hospitality-App
