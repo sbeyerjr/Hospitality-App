@@ -29,7 +29,7 @@ function getRecentHospitals(callbackFn) {
 
 function displayHospitals(data) {
     for (index in data.hospitals) {
-	   $('body').append(
+	   $('.js-hospitals').append(
         '<p>' + data.hospitals[index].name + '</br>' + data.hospitals[index].location + '</p>');
     }
 }
