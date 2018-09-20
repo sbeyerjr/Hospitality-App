@@ -1,0 +1,14 @@
+{
+  "name": "hospitality",
+  "version": "1.0.0",
+  "description": "An app to help people keep up with hospital visitations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Steven Beyer",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
