@@ -213,6 +213,7 @@ function generatePatientData() {
           expect(res.body.name).to.equal(newHospital.name);
           expect(res.body.id).to.not.be.null;
           expect(res.body.location).to.equal(newHospital.location);
+          return Restaurant.findById(res.body.id);
         })
         .then(function(hospital) {
           expect(hospital.name).to.equal(newHospital.name);
