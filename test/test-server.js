@@ -209,11 +209,10 @@ function generatePatientData() {
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
           expect(res.body).to.include.keys(
-            'id', 'name', 'location');
+            'name', 'location');
           expect(res.body.name).to.equal(newHospital.name);
-          expect(res.body.id).to.not.be.null;
           expect(res.body.location).to.equal(newHospital.location);
-          return Restaurant.findById(res.body.id);
+        
         })
         .then(function(hospital) {
           expect(hospital.name).to.equal(newHospital.name);
