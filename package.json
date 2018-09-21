@@ -4,16 +4,21 @@
   "description": "An app to help people keep up with hospital visitations.",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "mocha"
   },
   "author": "Steven Beyer",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "Faker": "^0.7.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.13",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
+    "faker": "^4.1.0",
     "mocha": "^5.2.0"
   }
 }
