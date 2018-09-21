@@ -11,7 +11,7 @@ const app = express();
 app.use(express.static("public"));
 
 const {Hospital} = require("./models");
-const {Patient} = require('./models')
+const {Patient} = require("./models")
 
 app.use(express.json());
 
@@ -37,7 +37,7 @@ app.get('/hospitals', (req, res) => {
       .limit(10)    
       .then(patients => {
         res.json({
-          hospitals: patients.map(
+          patients: patients.map(
             (patient) => patient.serialize())
         });
       })
