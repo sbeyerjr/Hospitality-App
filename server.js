@@ -11,6 +11,7 @@ const app = express();
 app.use(express.static("public"));
 
 const {Hospital} = require("./models");
+const {Patient} = require('./models')
 
 app.use(express.json());
 
@@ -22,6 +23,22 @@ app.get('/hospitals', (req, res) => {
         res.json({
           hospitals: hospitals.map(
             (hospital) => hospital.serialize())
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+      });
+  });
+
+  app.get('/patients', (req, res) => {
+    Patient
+      .find()
+      .limit(10)    
+      .then(patients => {
+        res.json({
+          hospitals: patients.map(
+            (patient) => patient.serialize())
         });
       })
       .catch(err => {

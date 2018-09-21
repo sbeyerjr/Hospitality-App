@@ -6,6 +6,7 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 
 const {Hospital} = require('../models');
+const {Patient} = require('../models');
 const {app, runServer, closeServer} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 
@@ -101,6 +102,93 @@ function tearDownDb() {
   
             expect(resHospital.id).to.equal(hospital.id);
             expect(resHospital.name).to.equal(hospital.name);
+          });
+      });
+    });
+  
+  });
+
+  function seedPatientData() {
+    console.info('Seeding Patient Info');
+    const seedData = [];
+
+    for (let i = 1; i <= 10; i++) {
+        seedData.push(generatePatientData());
+    }
+    return Patient.insertMany(seedData);
+}
+
+function generatePatientData() {
+    return {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        roomNumber: faker.random.number(),
+        wantsVisitors: faker.random.boolean(),
+        notes: faker.random.words()
+    }
+}
+
+  describe('Patients API Resource', function() {
+
+    before(function() {
+      return runServer(TEST_DATABASE_URL);
+    });
+  
+    beforeEach(function() {
+      return seedPatientData();
+    });
+  
+    afterEach(function() {
+      return tearDownDb();
+    });
+  
+    after(function() {
+      return closeServer();
+    });
+  
+    describe('GET endpoint', function() {
+  
+      it('should return all existing patients', function() {
+        let res;
+        return chai.request(app)
+          .get('/patients')
+          .then(function(_res) {
+            res = _res;
+            expect(res).to.have.status(200);
+            // otherwise our db seeding didn't work
+            expect(res.body.patients).to.have.lengthOf.at.least(1);
+            return Patient.count();
+          })
+          .then(function(count) {
+            expect(res.body.patients).to.have.lengthOf(count);
+          });
+      });
+  
+  
+      it('should return hospitals with right fields', function() {
+        // Strategy: Get back all patients, and ensure they have expected keys
+  
+        let resPatient;
+        return chai.request(app)
+          .get('/patients')
+          .then(function(res) {
+            expect(res).to.have.status(200);
+            expect(res).to.be.json;
+            expect(res.body.patients).to.be.a('array');
+            expect(res.body.patients).to.have.lengthOf.at.least(1);
+  
+            res.body.patients.forEach(function(patient) {
+              expect(patient).to.be.a('object');
+              expect(patient).to.include.keys(
+                'id', 'firstName', 'lastName', 'roomNumber', 'wantsVisitors', 'notes');
+            });
+            resPatient = res.body.patients[0];
+            return Patient.findById(resPatient.id);
+          })
+          .then(function(patient) {
+  
+            expect(resPatient.id).to.equal(patient.id);
+            expect(resPatient.name).to.equal(patient.name);
           });
       });
     });
