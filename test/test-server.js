@@ -165,7 +165,7 @@ function generatePatientData() {
       });
   
   
-      it('should return hospitals with right fields', function() {
+      it('should return patients with right fields', function() {
         // Strategy: Get back all patients, and ensure they have expected keys
   
         let resPatient;
@@ -193,6 +193,32 @@ function generatePatientData() {
       });
     });
   
+  });
+
+  describe('POST endpoint', function() {
+    it('should add a new hospital', function() {
+
+      const newHospital = generateHospitalData();
+      let mostRecentHospital;
+
+      return chai.request(app)
+        .post('/hospitals')
+        .send(newHospital)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys(
+            'id', 'name', 'location');
+          expect(res.body.name).to.equal(newHospital.name);
+          expect(res.body.id).to.not.be.null;
+          expect(res.body.location).to.equal(newHospital.location);
+        })
+        .then(function(hospital) {
+          expect(hospital.name).to.equal(newHospital.name);
+          expect(hospital.location).to.equal(newHospital.location);
+        });
+    });
   });
  
 describe("index page", function() {

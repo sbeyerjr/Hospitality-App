@@ -47,6 +47,29 @@ app.get('/hospitals', (req, res) => {
       });
   });
 
+  app.post('/hospitals', (req, res) => {
+    const requiredFields = ['name', 'location'];
+    for (let i = 0; i <= requiredFields.length; i++) {
+      const field = requiredFields[i];
+      if (!(field in req.body)) {
+        const message = `Missing \`${field}\`. Please put in the required field(s).`;
+        console.error(message);
+        return res.status(400).send(message); 
+      }
+    }
+
+    Hospital.create({
+      name:req.body.name,
+      location: req.body.location
+    })
+
+    .then(hospital => res.status(201).json(hospital.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "Internal server error" });
+    });
+});
+
   let server;
 
   function runServer(databaseUrl, port = PORT) {
