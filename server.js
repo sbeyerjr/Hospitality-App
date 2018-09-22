@@ -36,8 +36,7 @@ app.get('/hospitals', (req, res) => {
 
   app.get('/patients', (req, res) => {
     Patient
-      .find()
-      .limit(10)    
+      .find()    
       .then(patients => {
         res.json({
           patients: patients.map(
