@@ -121,7 +121,7 @@ function tearDownDb() {
             'name', 'location');
           expect(res.body.name).to.equal(newHospital.name);
           expect(res.body.location).to.equal(newHospital.location);
-        
+            return res.body;
         })
         .then(function(hospital) {
           expect(hospital.name).to.equal(newHospital.name);
