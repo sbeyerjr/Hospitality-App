@@ -3,10 +3,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
+const bodyparser = require("body-parser");
 
 const { PORT, DATABASE_URL } = require('./config');
 
 const app = express();
+
+const jsonparser = bodyparser.json();
 
 app.use(express.static("public"));
 
@@ -47,7 +50,8 @@ app.get('/hospitals', (req, res) => {
       });
   });
 
-  app.post('/hospitals', (req, res) => {
+  app.post('/hospitals', jsonparser, (req, res) => {
+    console.log(req.body);
     const requiredFields = ["name", "location"];
     for (let i = 0; i <= requiredFields.length; i++) {
       const field = requiredFields[i];
