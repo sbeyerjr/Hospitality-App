@@ -20,8 +20,7 @@ app.use(express.json());
 
 app.get('/hospitals', (req, res) => {
     Hospital
-      .find()
-      .limit(10)    
+      .find()    
       .then(hospitals => {
         res.json({
           hospitals: hospitals.map(
