@@ -60,7 +60,7 @@ app.get('/hospitals', (req, res) => {
       }
     }
 
-    Hospital.create({
+    return Hospital.create({
       name:req.body.name,
       location: req.body.location
     })
