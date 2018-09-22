@@ -65,7 +65,8 @@ app.get('/hospitals', (req, res) => {
       location: req.body.location
     })
 
-    .then(hospital => res.status(201).json(hospital.serialize()))
+    .then(hospital => {console.log(hospital)
+      res.status(201).json(hospital.serialize())})
     .catch(err => {
       console.error(err);
       res.status(500).json({ message: "Internal server error" });
