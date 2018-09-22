@@ -105,7 +105,29 @@ function tearDownDb() {
           });
       });
     });
-  
+    it('should add a new hospital', function() {
+
+      const newHospital = generateHospitalData();
+      let mostRecentHospital;
+
+      return chai.request(app)
+        .post('/hospitals')
+        .send(newHospital)
+        .then(function(res) {
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys(
+            'name', 'location');
+          expect(res.body.name).to.equal(newHospital.name);
+          expect(res.body.location).to.equal(newHospital.location);
+        
+        })
+        .then(function(hospital) {
+          expect(hospital.name).to.equal(newHospital.name);
+          expect(hospital.location).to.equal(newHospital.location);
+        });
+    });
   });
 
   function seedPatientData() {
@@ -195,31 +217,6 @@ function generatePatientData() {
   
   });
 
-  describe('POST endpoint', function() {
-    it('should add a new hospital', function() {
-
-      const newHospital = generateHospitalData();
-      let mostRecentHospital;
-
-      return chai.request(app)
-        .post('/hospitals')
-        .send(newHospital)
-        .then(function(res) {
-          expect(res).to.have.status(201);
-          expect(res).to.be.json;
-          expect(res.body).to.be.a('object');
-          expect(res.body).to.include.keys(
-            'name', 'location');
-          expect(res.body.name).to.equal(newHospital.name);
-          expect(res.body.location).to.equal(newHospital.location);
-        
-        })
-        .then(function(hospital) {
-          expect(hospital.name).to.equal(newHospital.name);
-          expect(hospital.location).to.equal(newHospital.location);
-        });
-    });
-  });
  
 describe("index page", function() {
   it("should exist", function() {
