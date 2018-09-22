@@ -53,7 +53,7 @@ app.get('/hospitals', (req, res) => {
   app.post('/hospitals', jsonparser, (req, res) => {
     console.log(req.body);
     const requiredFields = ["name", "location"];
-    for (let i = 0; i <= requiredFields.length; i++) {
+    for (let i = 0; i < requiredFields.length; i++) {
       const field = requiredFields[i];
       if (!(field in req.body)) {
         const message = `Missing \`${field}\`. Please put in the required field(s).`;
