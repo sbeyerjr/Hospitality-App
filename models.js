@@ -18,7 +18,7 @@ hospitalSchema.methods.serialize = function() {
 const patientSchema = mongoose.Schema({
     firstName:{type: String, required: true},
     lastName:{type: String, required: true},
-    roomNumber:{type: String, required: true},
+    roomNumber:{type: String, required: false},
     wantsVisitors:{type: Boolean, required: false},
     notes:{type: String, required: false}
 });

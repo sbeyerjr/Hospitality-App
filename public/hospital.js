@@ -1,3 +1,5 @@
+
+
 var MOCK_HOSPITALS = {
 	"hospitals": [
         {
@@ -23,21 +25,32 @@ var MOCK_HOSPITALS = {
     ]
 };
 
-function getRecentHospitals(callbackFn) {
-	setTimeout(function(){ callbackFn(MOCK_HOSPITALS)}, 1);
+function getHospitals() {
+        let data = $.get('/hospitals');
+        console.log(data);
+        for (index in data) {
+            $('.js-hospitals').append(
+             '<p>' + data[index].Hospital.responseJSON.hospital + '</p>');
+         }
 }
 
-function displayHospitals(data) {
-    for (index in data.hospitals) {
-	   $('.js-hospitals').append(
-        '<p>' + data.hospitals[index].name + '</br>' + data.hospitals[index].location + '</p>');
-    }
-}
+// function getRecentHospitals(callbackFn) {
+// 	setTimeout(function(){ callbackFn(getHospitals)}, 1);
+// }
 
-function getAndDisplayHospitals() {
-	getRecentHospitals(displayHospitals);
-}
+// function displayHospitals(data) {
+//     console.log(data);
+//     for (index in data.hospitals) {
+// 	   $('.js-hospitals').append(
+//         '<p>' + data.hospitals[index].name + '</br>' + data.hospitals[index].location + '</p>');
+//     }
+// }
+
+
+// function getAndDisplayHospitals() {
+// 	getRecentHospitals(displayHospitals);
+// }
 
 $(function() {
-	getAndDisplayHospitals();
+	getHospitals();
 })
