@@ -128,6 +128,51 @@ function tearDownDb() {
           expect(hospital.location).to.equal(newHospital.location);
         });
     });
+    it('should update fields you send over', function() {
+      const updateData = {
+        name: 'Honor Health',
+        location: '123 Main Street'
+      };
+
+      return Hospital
+        .findOne()
+        .then(function(hospital) {
+          updateData.id = hospital.id;
+
+          // make request then inspect it to make sure it reflects
+          // data we sent
+          return chai.request(app)
+            .put(`/hospitals/${hospital.id}`)
+            .send(updateData);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+
+          return Hospital.findById(updateData.id);
+        })
+        .then(function(hospital) {
+          expect(hospital.name).to.equal(updateData.name);
+          expect(hospital.location).to.equal(updateData.location);
+        });
+    });
+    it('delete a hospital by id', function() {
+
+      let hospital;
+
+      return Hospital
+        .findOne()
+        .then(function(_hospital) {
+          hospital = _hospital;
+          return chai.request(app).delete(`/hospitals/${hospital.id}`);
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+          return Hospital.findById(hospital.id);
+        })
+        .then(function(_hospital) {
+          expect(_hospital).to.be.null;
+        });
+    });
   });
 
   function seedPatientData() {
