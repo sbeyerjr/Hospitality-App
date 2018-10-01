@@ -1,48 +1,48 @@
-var MOCK_PATIENTS = {
-    "patients": [
-        {
-            "id": "11111",
-            "firstName": "John",
-            "lastName": "Smith",
-            "roomNumber": "3532",
-            "wantsVisitors": "yes",
-            "notes": "It went great"
-        },
-        {
-            "id": "22222",
-            "firstName": "Jane",
-            "lastName": "Doe",
-            "roomNumber": "3532",
-            "wantsVisitors": "yes",
-            "notes": "It went great"
-        },
-        {
-            "id": "33333",
-            "firstName": "Walt",
-            "lastName": "Disney",
-            "roomNumber": "3532",
-            "wantsVisitors": "yes",
-            "notes": "It went great"
-        },
-    ]
+function createNewHospital() {
+    $('#btn-hospital').click(event => {
+        $('.hospital-form').removeClass('hidden');
+    });
 }
 
-function getRecentPatients(callbackFn) {
-    setTimeout(function() { callbackFn(MOCK_PATIENTS)}, 1);
-}
+function getData(){
+    const text = `
+    <div class="patient-form">
+    <form id="new-patient">
+        <fieldset>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName">
+        <label for="roomNumber">Room Number</label>
+        <input type="text" id="roomNumber" name="roomNumber">
+        <button type="submit" id="submit-btn">Submit</button>
+    </fieldset>
+    </form>
+    </div>`;
+    $.getJSON('/hospitals', function(data) {
+        for (i = 0; i <= data.hospitals.length -1; i++) {
 
-function displayPatients (data) {
-    for (index in data.patients) {
-        $('.js-patients').append(
-            '<p>' + data.patients[index].firstName + ' ' +  data.patients[index].lastName + '</p>'
-        );
-    }
-}
+            const displayHospitalName = `
+            <div class="hospital-name">${data.hospitals[i].name}</div>
+            <div class="hospital-btn">
+            <button type="submit" id="btn-patient">Create New Patient</button>
+        </div>
+        <div class="patients${[i]} hidden">Test</div>`;
 
-function getAndDisplayPatients() {
-    getRecentPatients(displayPatients);
+            $('.js-hospitals').append(displayHospitalName);
+            $('#btn-patient').click(event => {
+                $(`.patients${[i]}`).removeClass('hidden').html(text);
+            });
+        }
+      });
+      
+    console.log(text);
+   
 }
 
 $(function(){
-    getAndDisplayPatients();
+    getData();
+    createNewHospital();
+    
 })
+

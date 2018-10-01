@@ -1,56 +1,28 @@
-
-
-var MOCK_HOSPITALS = {
-	"hospitals": [
-        {
-            "id": "1111111",
-            "name": "Honor Health",
-            "location": "123 Main Street"
-        },
-        {
-            "id": "2222222",
-            "name": "Willis Knighton Health",
-            "location": "325 Elm Street"
-        },
-        {
-            "id": "333333",
-            "name": "Osborne Health",
-            "location": "367 Sycamore Ave"
-        },
-        {
-            "id": "4444444",
-            "name": "Trinity Health",
-            "location": "632 Main Street"
-        }
-    ]
+function submitLogListener () {
+    $(document).on('submit','#new-hospital', function(event) {
+        event.preventDefault();
+        submitLog();
+    });
 };
 
-function getHospitals() {
-        let data = $.get('/hospitals');
-        console.log(data);
-        for (index in data) {
-            $('.js-hospitals').append(
-             '<p>' + data[index].Hospital.responseJSON.hospital + '</p>');
-         }
-}
+function submitLog () {
+    let logInfo = {
+        name: $('#name').val(),
+        location: $('#location').val(),
+    }
+    $.ajax({
+        url: '/hospitals',
+        type: 'POST',
+        data: JSON.stringify(logInfo),
+        contentType: 'application/json'
+    })
+    .done(() => {
+        window.location.href = 'dashboard.html';
+    })
+    .fail( err => {
+        console.log('Error: ', err.message);
+        $('#new-hospital').append('Please Input Name for Hospital');
+    })
+};
 
-// function getRecentHospitals(callbackFn) {
-// 	setTimeout(function(){ callbackFn(getHospitals)}, 1);
-// }
-
-// function displayHospitals(data) {
-//     console.log(data);
-//     for (index in data.hospitals) {
-// 	   $('.js-hospitals').append(
-//         '<p>' + data.hospitals[index].name + '</br>' + data.hospitals[index].location + '</p>');
-//     }
-// }
-
-
-// function getAndDisplayHospitals() {
-// 	getRecentHospitals(displayHospitals);
-// }
-
-$(function() {
-	getHospitals();
-})
+$(submitLogListener);
