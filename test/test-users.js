@@ -1,5 +1,5 @@
 'use strict';
-global.DATABASE_URL = 'mongodb://localhost/jwt-auth-demo-test';
+global.DATABASE_URL = 'mongodb://sbeyerjr:music123@ds263832.mlab.com:63832/hospitality-db';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
