@@ -8,22 +8,22 @@
 <body>
     <h1>Welcome to Hospital-ity</h1>
    
-    <div class="register">
-        <form id="new-account">
-                <fieldset>
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName">
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName">
-                <label for="username">User Name:</label>
-                <input type="text" id="username" name="username">
-                <label for="password">Password:</label>
-                <input type="text" id="password" name="password">
-                <button type="submit" id="register-btn">Register A New Account</button>
-            </fieldset>
-            </form>
-        </div>
+    <form id="login-form" class="js-login-form">
+        <fieldset>
+          <legend>Login</legend>
+          <div>
+            <label for="username">Username</label>
+            <input type="text" name="username" class="js-username-entry" value="">
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" class="js-password-entry" value="">
+          </div>
+          <button type="submit">Login</button>
+        </fieldset>
+      </form>
+      <div class="js-hospitals hidden">List of hospitals:</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="add-account.js"></script>
+    <script type="text/javascript" src="./js/login.js"></script>
 </body>
 </html>
