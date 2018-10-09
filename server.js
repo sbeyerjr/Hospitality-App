@@ -3,25 +3,19 @@ require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
-const jsonParser = bodyParser.json();
 const cors = require("cors");
 const app = express();
 const jwtAuth = require("./middleware/jwt-auth");
+const db = require("./db/mongoose");
 
 const hospitalListRouter = require('./routes/hospitals');
 const patientListRouter = require('./routes/patients');
 const usersRouter = require("./routes/users");
 
 
-const { body,validationResult } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
 const { PORT, DATABASE_URL } = require('./config');
-const {Hospital} = require("./models/hospital");
-const {Patient} = require("./models/patient")
 const authRouter = require("./routes/auth");
-
+ 
 
 
 app.use(express.static("public"));
@@ -79,6 +73,27 @@ function closeServer() {
 
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
+}
+
+app.use((err, req, res) => {
+  if (err.status) {
+    const errBody = Object.assign({}, err, { message: err.message });
+    res.status(err.status).json(errBody);
+  } else {
+    res.status(500).json({ message: "Internal Server Error" });
+    console.error(err);
+  }
+});
+
+// Listen for incoming connections
+if (process.env.NODE_ENV !== "test") {
+  db.connect();
+
+  app.listen(PORT, function () {
+    console.info(`Server listening on ${this.address().port}`);
+  }).on("error", err => {
+    console.error(err);
+  });
 }
 
 module.exports = { app, runServer, closeServer };
