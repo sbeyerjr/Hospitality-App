@@ -70,6 +70,7 @@
           </div>
           <button type="submit">Login</button>
           <div class="error-message js-error-message"></div>
+          <div class="success-message js-success-message"></div>
         </fieldset>
       </form>
 
@@ -97,8 +98,9 @@
         <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name">
         <input type="text" name="patient-last-name" class="js-patient-last-name-entry" required placeholder="Last Name"></br>
         <input type="text" name="room-number" class="js-room-number-entry" placeholder="Room Number"></br>
-        <input type="radio" name="wants-visitors" class="js-wants-visitors" value="true" checked> Yes<br>
-        <input type="radio" name="wants-visitors" class="js-wants-visitors" value="false"> No<br></br>
+        <span>Does the patient want visitors?</span></br>
+        <input type="radio" name="visitors" class="js-wants-visitors" value="true" checked> Yes<br>
+        <input type="radio" name="visitors" class="js-wants-visitors" value="false"> No<br></br>
         <textarea name="patient-notes" class="js-patient-notes-entry" placeholder="Notes From Your Visit"></textarea></br>
         <select name="hospital" class="js-patient-hospital-entry"></select></br>
         <button type="submit">+ Add New Patient</button>

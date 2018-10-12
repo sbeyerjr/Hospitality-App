@@ -66,10 +66,34 @@ function closeServer() {
   });
 }
 
-if (require.main === module) {
-  runServer(DATABASE_URL).catch(err => console.error(err));
+
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
+
+// Custom Error Handler
+app.use((err, req, res, next) => {
+  if (err.status) {
+    const errBody = Object.assign({}, err, { message: err.message });
+    res.status(err.status).json(errBody);
+  } else {
+    res.status(500).json({ message: "Internal Server Error" });
+    console.error(err);
+  }
+});
+
+// Listen for incoming connections
+if (process.env.NODE_ENV !== "test") {
+  db.connect();
+
+  app.listen(PORT, function () {
+    console.info(`Server listening on ${this.address().port}`);
+  }).on("error", err => {
+    console.error(err);
+  });
 }
 
 
-
-module.exports = { app, runServer, closeServer };
+module.exports = app, runServer, closeServer;

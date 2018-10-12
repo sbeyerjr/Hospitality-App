@@ -27,32 +27,39 @@ const hospitality = (function() {
     );
     $('.js-patients-list').html(patientsList);
 
-    const hospitalSelect = generateHospitalSelect(
-      store.hospitals);
+    const hospitalSelect = generateHospitalSelect(store.hospitals);
     $('.js-patient-hospital-entry').html(hospitalSelect);
 
-
     const editForm = $('.js-patient-edit-form');
-    editForm.find('.js-patient-title-entry').val(store.currentPatient.firstName);
+    editForm
+      .find('.js-patient-title-entry')
+      .val(store.currentPatient.firstName);
     editForm
       .find('.js-patient-content-entry')
       .val(store.currentPatient.lastName);
     editForm
       .find('.js-patient-hospital-entry')
       .val(store.currentPatient.hospitalId);
-    
   }
 
   /**
    * GENERATE HTML FUNCTIONS
    */
   function generatePatientsList(storePatient, currPatient) {
-    
     const listItems = storePatient.map(
       item => `
-          <li data-id="${item.id}" class="js-patient-element ${currPatient.id === item.id ? "active" : ""}">
-          <span style="font-weight:bold">${item.firstName} ${item.lastName}</span></br>
+          <li data-id="${item.id}" class="js-patient-element ${
+        currPatient.id === item.id ? 'active' : ''
+      }">
+          <span style="font-weight:bold">${item.firstName} ${
+        item.lastName
+      }</span></br>
           <span>Room Number: ${item.roomNumber}</span></br>
+          <span>Patient ${
+            item.wantsVisitors === true
+              ? 'wants visitors.'
+              : 'does not want visitors'
+          }</span></br>
           <span>Notes: ${item.notes}</span></br>
           <button class="removeBtn js-patient-delete-button">X</button>
           <div class="metadata">
@@ -60,20 +67,15 @@ const hospitality = (function() {
         </li>`
     );
     return listItems.join('');
-
   }
 
   function generateHospitalSelect(list) {
-    const hospitals = list.map(item => `<option value="${item.id}">${item.name}</option>`);
+    const hospitals = list.map(
+      item => `<option value="${item.id}">${item.name}</option>`
+    );
     console.log(hospitals);
-    return '<option value="">Select Hospital:</option>' + hospitals.join("");
+    return '<option value="">Select Hospital:</option>' + hospitals.join('');
   }
-
-  // list.map(
-  //   item => 
-  //   `<option value="${item.id}">${item.name}</option>`
-  // return '<option value="">Select Hospital:</option>' + hospitals.join('');
-
   /**
    * HELPERS
    */
@@ -89,17 +91,6 @@ const hospitality = (function() {
       .closest('.js-hospital-item')
       .data('id');
     return id;
-  }
-
-  function getTagIdFromElement(item) {
-    const id = $(item)
-      .closest('.js-tag-item')
-      .data('id');
-    return id;
-  }
-
-  function getTagsCommaSeparated(tags) {
-    return tags ? tags.map(tag => tag.name).join(', ') : '';
   }
 
   /**
@@ -119,24 +110,6 @@ const hospitality = (function() {
     });
   }
 
-  function handlePatientSearchSubmit() {
-    $('.js-patients-search-form').on('submit', event => {
-      event.preventDefault();
-
-      store.currentQuery.searchTerm = $(event.currentTarget)
-        .find('input')
-        .val();
-
-      api
-        .search('/patients', store.currentQuery)
-        .then(response => {
-          store.patients = response;
-          render();
-        })
-        .catch(handleErrors);
-    });
-  }
-
   function handlePatientFormSubmit() {
     $('.js-patient-edit-form').on('submit', function(event) {
       event.preventDefault();
@@ -147,10 +120,9 @@ const hospitality = (function() {
         firstName: editForm.find('.js-patient-first-name-entry').val(),
         lastName: editForm.find('.js-patient-last-name-entry').val(),
         roomNumber: editForm.find('.js-room-number-entry').val(),
-        wantsVisitors: editForm.find('.js-wants-visitors').val(),
+        wantsVisitors: editForm.find('input[name=visitors]:checked').val(),
         notes: editForm.find('.js-patient-notes-entry').val(),
         hospitalId: editForm.find('.js-patient-hospital-entry').val()
-        
       };
 
       if (store.currentPatient.id) {
@@ -211,7 +183,7 @@ const hospitality = (function() {
   }
 
   /**
-   * FOLDERS EVENT LISTENERS AND HANDLERS
+   * HOSPITALS EVENT LISTENERS AND HANDLERS
    */
   function handleHospitalClick() {
     $('.js-hospitals-list').on('click', '.js-hospital-link', event => {
@@ -233,13 +205,12 @@ const hospitality = (function() {
     });
   }
 
-function watchNewHospitalClick(){
-  $('.js-new-hospital').on('click', event => {
-    $('.js-new-hospital-form').removeClass('hidden');
-    $('.js-new-hospital').addClass('hidden');
-    
-});
-}
+  function watchNewHospitalClick() {
+    $('.js-new-hospital').on('click', event => {
+      $('.js-new-hospital-form').removeClass('hidden');
+      $('.js-new-hospital').addClass('hidden');
+    });
+  }
 
   function handleNewHospitalSubmit() {
     $('.js-new-hospital-form').on('submit', event => {
@@ -293,11 +264,6 @@ function watchNewHospitalClick(){
         .catch(handleErrors);
     });
   }
-
-  /**
-   * TAGS EVENT LISTENERS AND HANDLERS
-   */
-
 
   function handleSignupSubmit() {
     $('.js-signup-from').on('submit', event => {
@@ -353,8 +319,7 @@ function watchNewHospitalClick(){
   }
 
   function bindEventListeners() {
-    
-    watchNewHospitalClick()
+    watchNewHospitalClick();
     handlePatientItemClick();
     handlePatientFormSubmit();
     handlePatientStartNewSubmit();
@@ -364,10 +329,8 @@ function watchNewHospitalClick(){
     handleHospitalDeleteClick();
     handleSignupSubmit();
     handleLoginSubmit();
-    
   }
 
-  // This object contains the only exposed methods from this module:
   return {
     render: render,
     bindEventListeners: bindEventListeners

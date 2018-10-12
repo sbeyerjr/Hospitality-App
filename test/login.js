@@ -13,7 +13,7 @@ const User = require('../models/user');
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-describe("Noteful API - Login", function () {
+describe("Hospitality API - Login", function () {
 
   let user;
   const fullname = "Example User";
@@ -45,11 +45,11 @@ describe("Noteful API - Login", function () {
     return db.disconnect();
   });
 
-  describe("Noteful /api/login", function () {
+  describe("Noteful /auth/login", function () {
 
     it("Should return a 400 Error 'No credential provided' when no credentials are sent", function () {
       return chai.request(app)
-        .post("/login")
+        .post("/auth/login")
         .send({})
         .then(res => {
           expect(res).to.have.status(400);
@@ -59,7 +59,7 @@ describe("Noteful API - Login", function () {
 
     it("Should return 401 error 'Invalid credentials' at 'username' when sent an invalid 'username'", function () {
       return chai.request(app)
-        .post("/login")
+        .post("/auth/login")
         .send({ username: "wrongUsername", password })
         .then(res => {
           expect(res).to.have.status(401);
@@ -70,7 +70,7 @@ describe("Noteful API - Login", function () {
 
     it("Should return 401 error 'Invalid credentials' at 'password' when sent an invalid 'password'", function () {
       return chai.request(app)
-        .post("/login")
+        .post("/auth/login")
         .send({ username, password: "wrongPassword" })
         .then(res => {
           expect(res).to.have.status(401);
@@ -83,7 +83,7 @@ describe("Noteful API - Login", function () {
 
       it("Should return 200 OK with a valid JWT in 'authToken'", function () {
         return chai.request(app)
-          .post("/login")
+          .post("/auth/login")
           .send({ username, password })
           .then(res => {
             expect(res).to.have.status(200);
@@ -95,7 +95,7 @@ describe("Noteful API - Login", function () {
 
       it("Should return a valid JWT with correct 'id', 'username' and 'fullname'", function () {
         return chai.request(app)
-          .post("/login")
+          .post("/auth/login")
           .send({ username, password })
           .then(res => {
             const payload = jwt.verify(res.body.authToken, JWT_SECRET);
@@ -107,7 +107,7 @@ describe("Noteful API - Login", function () {
 
       it("Should return a JWT that does not NOT contains a password", function () {
         return chai.request(app)
-          .post("/login")
+          .post("/auth/login")
           .send({ username, password })
           .then(res => {
             const payload = jwt.verify(res.body.authToken, JWT_SECRET);
@@ -117,10 +117,10 @@ describe("Noteful API - Login", function () {
     });
   });
 
-  describe("POST /api/refresh", function () {
+  describe("POST /refresh", function () {
     it("Should reject requests when no 'Authorization' header is sent", function () {
       return chai.request(app)
-        .post("/refresh")
+        .post("/auth/refresh")
         .then(res => {
           expect(res).to.have.status(401);
           expect(res.body.message).to.equal("No 'Authorization' header found");
@@ -131,7 +131,7 @@ describe("Noteful API - Login", function () {
       const token = jwt.sign({ user }, JWT_SECRET, { subject: username, expiresIn: "1m" });
 
       return chai.request(app)
-        .post("/refresh")
+        .post("/auth/refresh")
         .set("Authorization", `FooBar ${token}`)
         .then(res => {
           expect(res).to.have.status(401);
@@ -142,7 +142,7 @@ describe("Noteful API - Login", function () {
 
     it("Should reject request when 'Authorization' with 'Bearer' type does NOT contain a token", function () {
       return chai.request(app)
-        .post("/refresh")
+        .post("/auth/refresh")
         .set("Authorization", "Bearer  ")
         .then(res => {
           expect(res).to.have.status(401);
@@ -156,7 +156,7 @@ describe("Noteful API - Login", function () {
       const token = jwt.sign({ user }, "INVALID", { subject: username, expiresIn: "1m" });
 
       return chai.request(app)
-        .post("/refresh")
+        .post("/auth/refresh")
         .set("Authorization", `Bearer ${token}`)
         .then(res => {
           expect(res).to.have.status(401);
@@ -171,7 +171,7 @@ describe("Noteful API - Login", function () {
       const token = jwt.sign({ user }, JWT_SECRET, { subject: username, expiresIn: "0" });
 
       return chai.request(app)
-        .post("/refresh")
+        .post("/auth/refresh")
         .set("Authorization", `Bearer ${token}`)
         .then(res => {
           expect(res).to.have.status(401);
@@ -185,7 +185,7 @@ describe("Noteful API - Login", function () {
       it("Should return 200 OK and a object with a 'authToken' property and a valid JWT", function () {
         const token = jwt.sign({ user }, JWT_SECRET, { subject: username, expiresIn: "1m" });
         return chai.request(app)
-          .post("/refresh")
+          .post("/auth/refresh")
           .set("Authorization", `Bearer ${token}`)
           .then(res => {
             expect(res).to.have.status(200);
@@ -198,7 +198,7 @@ describe("Noteful API - Login", function () {
       it("Should return a valid JWT with correct 'id', 'username' and 'fullname'", function () {
         const token = jwt.sign({ user }, JWT_SECRET, { subject: username, expiresIn: "1m" });
         return chai.request(app)
-          .post("/refresh")
+          .post("/auth/refresh")
           .set("Authorization", `Bearer ${token}`)
           .then(res => {
             const payload = jwt.verify(res.body.authToken, JWT_SECRET);
@@ -210,7 +210,7 @@ describe("Noteful API - Login", function () {
       it("Should return a JWT that does not NOT contains a password", function () {
         const token = jwt.sign({ user }, JWT_SECRET, { subject: username, expiresIn: "1m" });
         return chai.request(app)
-          .post("/refresh")
+          .post("/auth/refresh")
           .set("Authorization", `Bearer ${token}`)
           .then(res => {
             const payload = jwt.verify(res.body.authToken, JWT_SECRET);
@@ -223,7 +223,7 @@ describe("Noteful API - Login", function () {
         const decoded = jwt.decode(token);
 
         return chai.request(app)
-          .post("/refresh")
+          .post("/auth/refresh")
           .set("Authorization", `Bearer ${token}`)
           .then(res => {
             const payload = jwt.verify(res.body.authToken, JWT_SECRET);
