@@ -3,11 +3,11 @@
 const store = (function () {
 
   return {
-    notes: [],
-    folders: [],
-    tags: [],
+    hospitals: [],
+    patients: [],
+    firstName: [],
 
-    currentNote: {},
+    currentPatient: {},
     currentQuery: {
       searchTerm: "",
     },

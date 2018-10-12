@@ -6,11 +6,7 @@ const { TEST_DATABASE_URL } = require('../config');
 
 function connect(url = TEST_DATABASE_URL) {
   return mongoose
-    .connect(url)
-    .then(instance => {
-      const conn = instance.connections[0];
-      console.info(`Using: mongodb://${conn.host}:${conn.port}/${conn.name}`);
-    })
+    .connect(url, { useMongoClient: true })
     .catch(err => {
       console.error(`ERROR: ${err.message}`);
     });

@@ -1,17 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>Hospital-ity</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="main.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Hospitality</title>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet">
+  <link rel="stylesheet" href="./style/main.css">
+  <link rel="stylesheet" href="./style/grid.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
 </head>
+
 <body>
-    <h1>Welcome to Hospital-ity</h1>
-   
-    <form id="login-form" class="js-login-form">
+  <header>
+    <div class="topnav">
+      <div class="logo">Hospitality <i class="far fa-hospital"></i></div>
+      <div class="topnav-right">
+        <a href="#search">Register</a>
+        <a href="#about">Login</a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="signup-login">
+      <div class="topnav">
+        <div class="logo">Hospitality <i class="far fa-hospital"></i></div>
+        <div class="topnav-right">
+          <a href="#search">Register</a>
+          <a href="#about">Login</a>
+        </div>
+      </div>
+      <form id="signup-form" class="js-signup-from">
         <fieldset>
-          <legend>Login</legend>
           <div>
+            <legend>Signup</legend>
+            <label for="fullname">Full Name</label>
+            <input type="text" name="fullname" class="js-fullname-entry" value="">
+          </div>
+          <div>
+            <label for="username">Username</label>
+            <input type="text" name="username" class="js-username-entry" value="">
+          </div>
+          <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" class="js-password-entry" value="">
+          </div>
+          <button type="submit">Signup</button>
+        </fieldset>
+      </form>
+
+      <form id="login-form" class="js-login-form">
+        <fieldset>
+          <div>
+              <legend>Login</legend>
             <label for="username">Username</label>
             <input type="text" name="username" class="js-username-entry" value="">
           </div>
@@ -22,8 +68,57 @@
           <button type="submit">Login</button>
         </fieldset>
       </form>
-      <div class="js-hospitals hidden">List of hospitals:</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/login.js"></script>
+
+
+    </section>
+
+    <nav class="hospitals-tags">
+      <header>
+        <h2>Hospitals</h2>
+        <div class="js-new-hospital"><button type="submit">Add Hospital</button></div>
+        <form id="new-hospital-form" class="js-new-hospital-form hidden">
+          <input type="text" class="js-new-hospital-entry" placeholder="hospital name"></br>
+          <input type="text" class="js-new-hospital-location" placeholder="location"></br>
+          <button type="submit">Add Hospital</button>
+        </form>
+      </header>
+      <ul class="js-hospitals-list"></ul>
+    </nav>
+
+    <article>
+      <header>
+        <h2>Patient</h2>
+        <form id="new-patient-form" class="js-start-new-patient-form">
+          <button type="submit">New Patient +</button>
+        </form>
+      </header>
+      <form id="patient-edit-form" class="js-patient-edit-form">
+        <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name">
+        <input type="text" name="patient-last-name" class="js-patient-last-name-entry" required placeholder="Last Name"></br>
+        <input type="text" name="room-number" class="js-room-number-entry" placeholder="Room Number"></br>
+        <input type="radio" name="wants-visitors" class="js-wants-visitors" value="true" checked> Yes<br>
+        <input type="radio" name="wants-visitors" class="js-wants-visitors" value="false"> No<br></br>
+        <textarea name="patient-notes" class="js-patient-notes-entry" placeholder="Notes From Your Visit"></textarea></br>
+        <select name="hospital" class="js-patient-hospital-entry"></select></br>
+        <button type="submit">Save</button>
+      </form>
+    </article>
+    <div class="js-patients-list"></div>
+  </main>
+
+  <footer>
+    <div class="success-message js-success-message"></div>
+    <div class="error-message js-error-message"></div>
+  </footer>
+
+  <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k="
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="js/api.js"></script>
+  <script type="text/javascript" src="js/store.js"></script>
+  <script type="text/javascript" src="js/hospitality.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
 </body>
+
 </html>
