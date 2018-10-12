@@ -27,16 +27,8 @@ const hospitality = (function() {
     );
     $('.js-patients-list').html(patientsList);
 
-    const hospitalList = generateHospitalList(
-      store.hospitals,
-      store.currentQuery
-    );
-
-    $('.js-hospital-list').html(hospitalList);
-
-    
-
-    const hospitalSelect = generateHospitalSelect(store.hospitals);
+    const hospitalSelect = generateHospitalSelect(
+      store.hospitals);
     $('.js-patient-hospital-entry').html(hospitalSelect);
 
 
@@ -59,7 +51,7 @@ const hospitality = (function() {
     const listItems = storePatient.map(
       item => `
           <li data-id="${item.id}" class="js-patient-element ${currPatient.id === item.id ? "active" : ""}">
-          <a href="#" class="name js-patient-link">${item.firstName} ${item.lastName}</a></br>
+          <span style="font-weight:bold">${item.firstName} ${item.lastName}</span></br>
           <span>Room Number: ${item.roomNumber}</span></br>
           <span>Notes: ${item.notes}</span></br>
           <button class="removeBtn js-patient-delete-button">X</button>
@@ -67,39 +59,14 @@ const hospitality = (function() {
             </div>
         </li>`
     );
-    console.log(listItems);
     return listItems.join('');
 
   }
 
-  function generateHospitalList(list, currQuery) {
-    const showAllItem = `
-        <li data-id="" class="js-hospital-item ${
-          currQuery.hospitalId ? 'active' : ''
-        }">
-          <a href="#" class="name js-hospital-link">All</a>
-        </li>`;
-
-    const listItems = list.map(
-      item => `
-        <li data-id="${item.id}" class="js-hospital-item ${
-        currQuery.hospitalId === item.id ? 'active' : ''
-      }">
-          <a href="#" class="name js-hospital-link">${item.name}</a>
-          <button class="removeBtn js-hospital-delete">X</button>
-        </li>`
-    );
-
-    return [showAllItem, ...listItems].join('');
-  }
-
   function generateHospitalSelect(list) {
-    const listItems = list.map(
-      item => `
-          ${item.name}`
-    );
-    console.log(listItems);
-    
+    const hospitals = list.map(item => `<option value="${item.id}">${item.name}</option>`);
+    console.log(hospitals);
+    return '<option value="">Select Hospital:</option>' + hospitals.join("");
   }
 
   // list.map(
@@ -393,7 +360,6 @@ function watchNewHospitalClick(){
     handlePatientStartNewSubmit();
     handlePatientDeleteClick();
     handleHospitalClick();
-
     handleNewHospitalSubmit();
     handleHospitalDeleteClick();
     handleSignupSubmit();

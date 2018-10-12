@@ -61,9 +61,11 @@ body {
   
   
   .signup-login fieldset {
-    display: inline-block;
+    width: 80%;
     background-color: white;
     border-radius: 5px;
+    margin: auto;
+    text-align: center;
   }
   
   .signup-login input,
@@ -74,4 +76,37 @@ body {
   .signup-login label {
     width: 5em;
     display: inline-block;
+  }
+  input {
+    border-radius: 5px;
+    height: 30px;
+  }
+  .hidden {
+      display: none;
+  }
+  .my-patients, .add-patients {
+      background-color: white;
+      border-radius: 5px;
+  }
+  .add-patients {
+      margin-right: 10px;
+      padding: 8px;
+  }
+
+  button {
+      background-color: rgba(24, 33, 124);
+      color: white;
+      border-radius: 5px;
+      padding: 5px 10px
+  }
+
+  .js-patient-element {
+      background-color: #ecf0f1;
+      color: black;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 10px;
+  }
+  li {
+      list-style-type: none;
   }

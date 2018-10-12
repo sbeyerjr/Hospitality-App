@@ -21,9 +21,8 @@
     <div class="topnav">
       <div class="logo">Hospitality <i class="far fa-hospital"></i></div>
       <div class="topnav-right">
-        <a href="#search">Register</a>
-        <a href="#about">Login</a>
-      </div>
+          <a href="/" class="js-logoff">Logoff</a>
+        </div>
     </div>
   </header>
   <main>
@@ -31,11 +30,12 @@
       <div class="topnav">
         <div class="logo">Hospitality <i class="far fa-hospital"></i></div>
         <div class="topnav-right">
-          <a href="#search">Register</a>
-          <a href="#about">Login</a>
+          <a href="#" class="js-register">Register</a>
+          <a href="#" class="js-login">Login</a>
         </div>
       </div>
-      <form id="signup-form" class="js-signup-from">
+      
+      <form id="signup-form" class="js-signup-from hidden">
         <fieldset>
           <div>
             <legend>Signup</legend>
@@ -51,10 +51,13 @@
             <input type="password" name="password" class="js-password-entry" value="">
           </div>
           <button type="submit">Signup</button>
+          <div class="success-message js-success-message"></div>
+          <div class="error-message js-error-message"></div>
         </fieldset>
+        
       </form>
 
-      <form id="login-form" class="js-login-form">
+      <form id="login-form" class="js-login-form hidden">
         <fieldset>
           <div>
               <legend>Login</legend>
@@ -66,12 +69,14 @@
             <input type="password" name="password" class="js-password-entry" value="">
           </div>
           <button type="submit">Login</button>
+          <div class="error-message js-error-message"></div>
         </fieldset>
       </form>
 
 
     </section>
-
+<div class="row">
+  <div class="col-6 add-patients">
     <nav class="hospitals-tags">
       <header>
         <h2>Hospitals</h2>
@@ -84,13 +89,9 @@
       </header>
       <ul class="js-hospitals-list"></ul>
     </nav>
-
     <article>
       <header>
         <h2>Patient</h2>
-        <form id="new-patient-form" class="js-start-new-patient-form">
-          <button type="submit">New Patient +</button>
-        </form>
       </header>
       <form id="patient-edit-form" class="js-patient-edit-form">
         <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name">
@@ -100,14 +101,19 @@
         <input type="radio" name="wants-visitors" class="js-wants-visitors" value="false"> No<br></br>
         <textarea name="patient-notes" class="js-patient-notes-entry" placeholder="Notes From Your Visit"></textarea></br>
         <select name="hospital" class="js-patient-hospital-entry"></select></br>
-        <button type="submit">Save</button>
+        <button type="submit">+ Add New Patient</button>
       </form>
     </article>
+  </div>
+  <div class="col-4 my-patients">
+    <h2>My Patients</h2>
     <div class="js-patients-list"></div>
+  </div>
+  </div>
   </main>
 
   <footer>
-    <div class="success-message js-success-message"></div>
+    
     <div class="error-message js-error-message"></div>
   </footer>
 
