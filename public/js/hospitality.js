@@ -87,11 +87,12 @@ const hospitality = (function() {
   }
 
   function generateHospitalSelect(list) {
-    const hospitals = list.map(
-      item => `<option value="${item.name}">${item.name}</option>`
-    );
-    console.log(hospitals);
-    return '<option value="">Select Hospital:</option>' + hospitals.join('');
+    // const hospitals = list.map(
+    //   item => `<option value="${item.name}">${item.name}</option>`
+    // );
+    // console.log(hospitals);
+    // return '<option value="">Select Hospital:</option>' + hospitals.join('');
+    return api.details('/hospitals');
   }
   /**
    * HELPERS

@@ -6,7 +6,6 @@ mongoose.Promise = global.Promise;
 const cors = require('cors');
 const app = express();
 const jwtAuth = require('./middleware/jwt-auth');
-const db = require('./db/mongoose');
 
 const hospitalListRouter = require('./routes/hospitals');
 const patientListRouter = require('./routes/patients');
@@ -66,34 +65,27 @@ function closeServer() {
   });
 }
 
-
 app.use((req, res, next) => {
-  const err = new Error("Not Found");
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // Custom Error Handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   if (err.status) {
     const errBody = Object.assign({}, err, { message: err.message });
     res.status(err.status).json(errBody);
   } else {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: 'Internal Server Error' });
     console.error(err);
   }
 });
 
 // Listen for incoming connections
-if (process.env.NODE_ENV !== "test") {
-  db.connect();
-
-  app.listen(PORT, function () {
-    console.info(`Server listening on ${this.address().port}`);
-  }).on("error", err => {
-    console.error(err);
-  });
+if (require.main === module) {
+  runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
-
-module.exports = app, runServer, closeServer;
+module.exports = app;
+(module.exports = runServer), closeServer;
