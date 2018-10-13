@@ -14,112 +14,42 @@ const app = require('../server');
 const runServer = require('../server');
 const closeServer = require('../server');
 const { TEST_DATABASE_URL } = require('../config');
-
+const should = chai.should();
 chai.use(chaiHttp);
 
-function seedHospitalData() {
-  console.info('seeding hospital data');
-  const seedData = [];
+describe('Hospitals', function() {
 
-  for (let i = 1; i <= 10; i++) {
-    seedData.push(generateHospitalData());
-  }
-  // this will return a promise
-  return Hospital.insertMany(seedData);
-}
-
-function generateHospitalData() {
-  return {
-    name: faker.company.companyName(),
-
-    location: faker.address.streetAddress()
-  };
-}
-
-function tearDownDb() {
-  console.warn('Deleting database');
-  return mongoose.connection.dropDatabase();
-}
-
-describe('Hospitals API resource', function() {
-  // we need each of these hook functions to return a promise
-  // otherwise we'd need to call a `done` callback. `runServer`,
-  // `seedHospitalData` and `tearDownDb` each return a promise,
-  // so we return the value returned by these function calls.
-  before(function() {
-    return runServer(TEST_DATABASE_URL);
-  });
-
-  beforeEach(function() {
-    return seedHospitalData();
-  });
-
-  afterEach(function() {
-    return tearDownDb();
-  });
-
-  after(function() {
-    return closeServer();
-  });
-
-  // note the use of nested `describe` blocks.
-  // this allows us to make clearer, more discrete tests that focus
-  // on proving something small
-  describe('GET endpoint', function() {
-
-    it('should return all existing hospitals', function() {
-      // strategy:
-      //    1. get back all hospitals returned by by GET request to `/hospitals`
-      //    2. prove res has right status, data type
-      //    3. prove the number of hospitals we got back is equal to number
-      //       in db.
-      //
-      // need to have access to mutate and access `res` across
-      // `.then()` calls below, so declare it here so can modify in place
-      let res;
-      return chai.request(app)
-        .get('/hospitals')
-        .then(function(_res) {
-          // so subsequent .then blocks can access response object
-          res = _res;
-          expect(res).to.have.status(200);
-          // otherwise our db seeding didn't work
-          expect(res.body.hospitals).to.have.lengthOf.at.least(1);
-          return Hospital.count();
-        })
-        .then(function(count) {
-          expect(res.body.hospitals).to.have.lengthOf(count);
-        });
+    before(function() {
+      return runServer();
     });
-
-
-    it('should return hospitals with right fields', function() {
-      // Strategy: Get back all hospitals, and ensure they have expected keys
-
-      let resHospital;
+  
+    after(function() {
+      return closeServer();
+    });
+  
+    it('should list hospitals on GET', function() {
+      // recall that we manually add some recipes to `Recipes`
+      // inside `recipesRouter.js`. Later in this course,
+      // once we're using a database layer, we'll seed
+      // our database with test data, and we can form our expectations
+      // about what GET should return, based on what we know about
+      // the state of our database.
       return chai.request(app)
         .get('/hospitals')
         .then(function(res) {
-          expect(res).to.have.status(200);
-          expect(res).to.be.json;
-          expect(res.body.hospitals).to.be.a('array');
-          expect(res.body.hospitals).to.have.lengthOf.at.least(1);
-
-          res.body.hospitals.forEach(function(hospital) {
-            expect(hospital).to.be.a('object');
-            expect(hospital).to.include.keys(
-              'id', 'name', 'location');
+  
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('array');
+  
+          res.body.should.have.length.of.at.least(1);
+  
+          // each item should be an object with key/value pairs
+          // for `id`, `name` and `ingredients`.
+          res.body.forEach(function(item) {
+            item.should.be.a('object');
+            item.should.include.keys('id', 'name', 'location');
           });
-          resHospital = res.body.hospitals[0];
-          return Hospital.findById(resHospital.id);
-        })
-        .then(function(hospital) {
-
-          expect(resHospital.id).to.equal(hospital.id);
-          expect(resHospital.name).to.equal(hospital.name);
-          expect(resHospital.location).to.equal(hospital.location);
-         
         });
     });
   });
-});
