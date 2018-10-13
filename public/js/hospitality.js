@@ -27,6 +27,9 @@ const hospitality = (function() {
     );
     $('.js-patients-list').html(patientsList);
 
+    const hospitalList = generateHospitalList(store.hospitals, store.currentQuery);
+    $(".js-hospital-list").html(hospitalList);
+
     const hospitalSelect = generateHospitalSelect(store.hospitals);
     $('.js-patient-hospital-entry').html(hospitalSelect);
 
@@ -68,10 +71,24 @@ const hospitality = (function() {
     );
     return listItems.join('');
   }
+  function generateHospitalList(list, currQuery) {
+    const showAllItem = `
+      <li data-id="" class="js-hospital-item ${!currQuery.hospitalId ? "active" : ""}">
+        <a href="#" class="name js-hospital-link">All</a>
+      </li>`;
+
+    const listItems = list.map(item => `
+      <li data-id="${item.id}" class="js-hospital-item ${currQuery.hospitalId === item.id ? "active" : ""}">
+        <a href="#" class="name js-hospital-link">${item.name}</a>
+        <button class="removeBtn js-hospital-delete">X</button>
+      </li>`);
+
+    return [showAllItem, ...listItems].join("");
+  }
 
   function generateHospitalSelect(list) {
     const hospitals = list.map(
-      item => `<option value="${item.id}">${item.name}</option>`
+      item => `<option value="${item.name}">${item.name}</option>`
     );
     console.log(hospitals);
     return '<option value="">Select Hospital:</option>' + hospitals.join('');
@@ -113,7 +130,11 @@ const hospitality = (function() {
   function handlePatientFormSubmit() {
     $('.js-patient-edit-form').on('submit', function(event) {
       event.preventDefault();
-
+      const newFirstName = $('.js-patient-first-name-entry');
+      const newLastName = $('.js-patient-last-name-entry');
+      const newRoomNumber = $('.js-room-number-entry');
+      const newWantsVisitors = $('.js-wants-visitors');
+      const newNote = $('.js-patient-notes-entry');
       const editForm = $(event.currentTarget);
       const patientObj = {
         id: store.currentPatient.id,
@@ -138,10 +159,17 @@ const hospitality = (function() {
           })
           .catch(handleErrors);
       } else {
+        $('.js-start-new-patient-form').removeClass('hidden');
+        $('.js-patient-edit-form').addClass('hidden');
         api
           .create('/patients', patientObj)
           .then(createResponse => {
             store.currentPatient = createResponse;
+            newFirstName.val('');
+            newLastName.val('');
+            newRoomNumber.val('');
+            newWantsVisitors.val('');
+            newNote.val('');
             return api.search('/patients', store.currentQuery);
           })
           .then(response => {
@@ -196,7 +224,7 @@ const hospitality = (function() {
       }
 
       api
-        .search('/patients', store.currentQuery)
+        .search('/hospitals', store.currentQuery)
         .then(response => {
           store.patients = response;
           render();

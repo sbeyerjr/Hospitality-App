@@ -5,7 +5,6 @@ const store = (function () {
   return {
     hospitals: [],
     patients: [],
-    firstName: [],
 
     currentPatient: {},
     currentQuery: {

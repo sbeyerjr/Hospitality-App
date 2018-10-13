@@ -34,7 +34,7 @@
           <a href="#" class="js-login">Login</a>
         </div>
       </div>
-      
+      <div class="sign-up">
       <form id="signup-form" class="js-signup-from hidden">
         <fieldset>
           <div>
@@ -50,13 +50,13 @@
             <label for="password">Password</label>
             <input type="password" name="password" class="js-password-entry" value="">
           </div>
-          <button type="submit">Signup</button>
+          <button type="submit">Signup</button><button type="button" class="js-signup-cancel">Cancel</button>
           <div class="success-message js-success-message"></div>
           <div class="error-message js-error-message"></div>
         </fieldset>
         
       </form>
-
+</div>
       <form id="login-form" class="js-login-form hidden">
         <fieldset>
           <div>
@@ -68,7 +68,7 @@
             <label for="password">Password</label>
             <input type="password" name="password" class="js-password-entry" value="">
           </div>
-          <button type="submit">Login</button>
+          <button type="submit">Login</button><button type="button" class="js-login-cancel">Cancel</button>
           <div class="error-message js-error-message"></div>
           <div class="success-message js-success-message"></div>
         </fieldset>
@@ -80,23 +80,23 @@
   <div class="col-6 add-patients">
     <nav class="hospitals-tags">
       <header>
-        <h2>Hospitals</h2>
-        <div class="js-new-hospital"><button type="submit">Add Hospital</button></div>
-        <form id="new-hospital-form" class="js-new-hospital-form hidden">
-          <input type="text" class="js-new-hospital-entry" placeholder="hospital name"></br>
-          <input type="text" class="js-new-hospital-location" placeholder="location"></br>
-          <button type="submit">Add Hospital</button>
-        </form>
+        
       </header>
       <ul class="js-hospitals-list"></ul>
     </nav>
     <article>
       <header>
-        <h2>Patient</h2>
+        <h2>Add a Patient</h2>
+        <form id="new-note-form" class="js-start-new-patient-form hidden">
+            <button type="submit" class="js-add-new-patient-btn">Add New Patient +</button>
+          </form>
       </header>
       <form id="patient-edit-form" class="js-patient-edit-form">
-        <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name">
+        <label for="js-patient-first-name-entry"><span>First Name:</span>
+        <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name"></br>
+        <label for="js-patient-last-name-entry"><span>Last Name:</span>
         <input type="text" name="patient-last-name" class="js-patient-last-name-entry" required placeholder="Last Name"></br>
+        <label for="js-room-number-entry"><span>Patient's Room Number:</span>
         <input type="text" name="room-number" class="js-room-number-entry" placeholder="Room Number"></br>
         <span>Does the patient want visitors?</span></br>
         <input type="radio" name="visitors" class="js-wants-visitors" value="true" checked> Yes<br>
@@ -105,6 +105,12 @@
         <select name="hospital" class="js-patient-hospital-entry"></select></br>
         <button type="submit">+ Add New Patient</button>
       </form>
+        <div class="js-new-hospital"><button type="submit">Add Hospital</button></div>
+        <form id="new-hospital-form" class="js-new-hospital-form hidden">
+          <input type="text" class="js-new-hospital-entry" placeholder="hospital name"></br>
+          <input type="text" class="js-new-hospital-location" placeholder="location"></br>
+          <button type="submit">Add Hospital</button>
+        </form>
     </article>
   </div>
   <div class="col-4 my-patients">
