@@ -23,6 +23,7 @@ const hospitality = (function() {
     $('.signup-login').toggle(!store.authorized);
 
     $('add-patients').removeClass('hidden');
+    $('js-new-hospital').removeClass('hidden');
 
     const patientsList = generatePatientsList(
       store.patients,
