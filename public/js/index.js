@@ -6,6 +6,7 @@ $(document).ready(function () {
   hospitality.render();
 
 });
+
 function listenLogin(){
   $('.js-login').on('click', event => {
     $('.js-login-form').removeClass('hidden');

@@ -15,17 +15,16 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
 </head>
-
 <body>
   <header>
     <div class="topnav">
       <div class="logo">Hospitality <i class="far fa-hospital"></i></div>
       <div class="topnav-right">
-          <a href="/" class="js-logoff">Logoff</a>
-        </div>
+        <a href="/" class="js-logoff">Logoff</a>
+      </div>
     </div>
   </header>
-  <main>
+  <main role="main">
     <section class="signup-login">
       <div class="topnav">
         <div class="logo">Hospitality <i class="far fa-hospital"></i></div>
@@ -35,32 +34,32 @@
         </div>
       </div>
       <div class="sign-up">
-      <form id="signup-form" class="js-signup-from hidden">
-        <fieldset>
-          <div>
-            <legend>Signup</legend>
-            <label for="fullname">Full Name</label>
-            <input type="text" name="fullname" class="js-fullname-entry" value="">
-          </div>
-          <div>
-            <label for="username">Username</label>
-            <input type="text" name="username" class="js-username-entry" value="">
-          </div>
-          <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" class="js-password-entry" value="">
-          </div>
-          <button type="submit">Signup</button><button type="button" class="js-signup-cancel">Cancel</button>
-          <div class="success-message js-success-message"></div>
-          <div class="error-message js-error-message"></div>
-        </fieldset>
-        
-      </form>
-</div>
+        <form id="signup-form" class="js-signup-from hidden">
+          <fieldset>
+            <div>
+              <legend>Signup</legend>
+              <label for="fullname">Full Name</label>
+              <input type="text" name="fullname" class="js-fullname-entry" value="">
+            </div>
+            <div>
+              <label for="username">Username</label>
+              <input type="text" name="username" class="js-username-entry" value="">
+            </div>
+            <div>
+              <label for="password">Password</label>
+              <input type="password" name="password" class="js-password-entry" value="">
+            </div>
+            <button type="submit">Signup</button><button type="button" class="js-signup-cancel">Cancel</button>
+            <div class="success-message js-success-message"></div>
+            <div class="error-message js-error-message"></div>
+          </fieldset>
+        </form>
+      </div>
+
       <form id="login-form" class="js-login-form hidden">
         <fieldset>
           <div>
-              <legend>Login</legend>
+            <legend>Login</legend>
             <label for="username">Username</label>
             <input type="text" name="username" class="js-username-entry" value="">
           </div>
@@ -73,62 +72,49 @@
           <div class="success-message js-success-message"></div>
         </fieldset>
       </form>
-
-
     </section>
-<div class="row">
-  <div class="col-6 add-patients">
-    <nav class="hospitals-tags">
-      <header>
-        
-      </header>
-      <ul class="js-hospitals-list"></ul>
-    </nav>
-    <article>
-      <header>
-        <h2>Add a Patient</h2>
-        <form id="new-note-form" class="js-start-new-patient-form hidden">
-            <button type="submit" class="js-add-new-patient-btn">Add New Patient +</button>
-          </form>
-      </header>
-      <form id="patient-edit-form" class="js-patient-edit-form">
-        <label for="js-patient-first-name-entry"><span>First Name:</span>
-        <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name"></br>
-        <label for="js-patient-last-name-entry"><span>Last Name:</span>
-        <input type="text" name="patient-last-name" class="js-patient-last-name-entry" required placeholder="Last Name"></br>
-        <label for="js-room-number-entry"><span>Patient's Room Number:</span>
-        <input type="text" name="room-number" class="js-room-number-entry" placeholder="Room Number"></br>
-        <span>Does the patient want visitors?</span></br>
-        <input type="radio" name="visitors" class="js-wants-visitors" value="true" checked> Yes<br>
-        <input type="radio" name="visitors" class="js-wants-visitors" value="false"> No<br></br>
-        <textarea name="patient-notes" class="js-patient-notes-entry" placeholder="Notes From Your Visit"></textarea></br>
-        <select name="hospital" class="js-patient-hospital-entry"></select></br>
-        <button type="submit">+ Add New Patient</button>
-      </form>
-        <div class="js-new-hospital"><button type="button">Add Hospital</button></div>
-        <form id="new-hospital-form" class="js-new-hospital-form hidden">
-          <input type="text" class="js-new-hospital-entry" placeholder="hospital name"></br>
-          <input type="text" class="js-new-hospital-location" placeholder="location"></br>
-          <button type="submit">Add Hospital</button>
-        </form>
-    </article>
-  </div>
-  <div class="col-4 my-patients">
-    <h2>My Patients</h2>
-    <div class="js-patients-list"></div>
-  </div>
-  </div>
-  </main>
 
-  <footer>
-    
-    <div class="error-message js-error-message"></div>
-  </footer>
+    <div class="row">
+      <div class="col-6 add-patients hidden">
+        <section>
+          <div class="add-patient"r>
+            <h2>Add a Patient</h2>
+            <form id="new-note-form" class="js-start-new-patient-form hidden">
+              <button type="submit" class="js-add-new-patient-btn">Add New Patient +</button>
+            </form>
+          </div>
+          <form id="patient-edit-form" class="js-patient-edit-form">
+            <label for="js-patient-first-name-entry"><span>First Name:</span>
+            <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name"></br>
+              <label for="js-patient-last-name-entry"><span>Last Name:</span>
+              <input type="text" name="patient-last-name" class="js-patient-last-name-entry" required placeholder="Last Name"></br>
+              <label for="js-room-number-entry"><span>Patient's Room Number:</span>
+              <input type="text" name="room-number" class="js-room-number-entry" placeholder="Room Number"></br>
+              <span>Does the patient want visitors?</span></br>
+              <input type="radio" name="visitors" class="js-wants-visitors" value="true" checked> Yes<br>
+              <input type="radio" name="visitors" class="js-wants-visitors" value="false"> No<br></br>
+              <textarea name="patient-notes" class="js-patient-notes-entry" placeholder="Notes From Your Visit"></textarea></br>
+              <select name="hospital" class="js-patient-hospital-entry"></select></br>
+              <button type="submit">+ Add New Patient</button>
+          </form>
+          <div class="js-new-hospital"><button type="button">Add Hospital</button></div>
+          <form id="new-hospital-form" class="js-new-hospital-form hidden">
+            <input type="text" class="js-new-hospital-entry" placeholder="hospital name"></br>
+            <input type="text" class="js-new-hospital-location" placeholder="location"></br>
+            <button type="submit">Add Hospital</button>
+          </form>
+        </section>
+      </div>
+      <div class="col-4 my-patients">
+        <h2>My Patients</h2>
+        <div class="js-patients-list"></div>
+      </div>
+    </div>
+  </main>
 
   <script src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k="
     crossorigin="anonymous"></script>
-
   <script type="text/javascript" src="js/api.js"></script>
   <script type="text/javascript" src="js/store.js"></script>
   <script type="text/javascript" src="js/hospitality.js"></script>
