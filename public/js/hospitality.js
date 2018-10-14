@@ -22,8 +22,9 @@ const hospitality = (function() {
   function render() {
     $('.signup-login').toggle(!store.authorized);
 
-    $('add-patients').removeClass('hidden');
-    $('js-new-hospital').removeClass('hidden');
+    $('.add-patients').removeClass('hidden');
+    $('.js-new-hospital').removeClass('hidden');
+    $('.my-patients').removeClass('hidden');
 
     const patientsList = generatePatientsList(
       store.patients,
