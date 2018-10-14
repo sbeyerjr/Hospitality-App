@@ -98,7 +98,6 @@ describe('Hospitals API resource', function() {
     });
   });
   describe('POST endpoint', function() {
-   
     it('should add a new hospital', function() {
       const newHospital = generateHospitalData();
 

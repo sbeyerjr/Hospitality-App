@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
 </head>
+
 <body>
   <header>
     <div class="topnav">
@@ -72,12 +73,34 @@
           <div class="success-message js-success-message"></div>
         </fieldset>
       </form>
+      <div class="row">
+        <div class="col-12 intro-text">
+          Having trouble keeping track of who's in the hospital?
+        </div>
+        <div class="col-12 second-intro-text">
+          It's easy as 1-2-3 with Hospitality <i class="far fa-hospital"></i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 instructions-text">
+          <img class="instruction-img" src="http://stevenbeyerjr.com/img/addpatient.png"></br>
+          1. Create a patient
+        </div>
+        <div class="col-4 instructions-text">
+          <img class="instruction-img" src="http://stevenbeyerjr.com/img/selecthospital.png"></br>
+          2. Select a hospital
+        </div>
+        <div class="col-4 instructions-text">
+          <img class="instruction-img" src="http://stevenbeyerjr.com/img/patients.png"></br>
+          3. Keep track of your visits
+        </div>
+      </div>
     </section>
 
     <div class="row">
       <div class="col-6 add-patients hidden">
         <section>
-          <div class="add-patient"r>
+          <div class="add-patient" r>
             <h2>Add a Patient</h2>
             <form id="new-note-form" class="js-start-new-patient-form hidden">
               <button type="submit" class="js-add-new-patient-btn">Add New Patient +</button>
@@ -85,23 +108,27 @@
           </div>
           <form id="patient-edit-form" class="js-patient-edit-form">
             <label for="js-patient-first-name-entry"><span>First Name:</span>
-            <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name"></br>
+              <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name"></br>
               <label for="js-patient-last-name-entry"><span>Last Name:</span>
-              <input type="text" name="patient-last-name" class="js-patient-last-name-entry" required placeholder="Last Name"></br>
-              <label for="js-room-number-entry"><span>Patient's Room Number:</span>
-              <input type="text" name="room-number" class="js-room-number-entry" placeholder="Room Number"></br>
-              <span>Does the patient want visitors?</span></br>
-              <input type="radio" name="visitors" class="js-wants-visitors" value="true" checked> Yes<br>
-              <input type="radio" name="visitors" class="js-wants-visitors" value="false"> No<br></br>
-              <textarea name="patient-notes" class="js-patient-notes-entry" placeholder="Notes From Your Visit"></textarea></br>
-              <select name="hospital" class="js-patient-hospital-entry"></select></br>
-              <button type="submit">+ Add New Patient</button>
+                <input type="text" name="patient-last-name" class="js-patient-last-name-entry" required placeholder="Last Name"></br>
+                <label for="js-room-number-entry"><span>Patient's Room Number:</span>
+                  <input type="text" name="room-number" class="js-room-number-entry" placeholder="Room Number"></br>
+                  <span>Does the patient want visitors?</span></br>
+                  <input type="radio" name="visitors" class="js-wants-visitors" value="true" checked> Yes<br>
+                  <input type="radio" name="visitors" class="js-wants-visitors" value="false"> No<br></br>
+                  <textarea name="patient-notes" class="js-patient-notes-entry" placeholder="Notes From Your Visit"></textarea></br>
+                  <select name="hospital" class="js-patient-hospital-entry"></select> <button type="button" class="js-add-hospital-btn">Add
+                    Hospital
+                  </button></br>
+                  <button type="submit">+ Add New Patient</button>
           </form>
-          <div class="js-new-hospital hidden"><button type="button">Add Hospital</button></div>
+          <div class="js-new-hospital hidden"></div>
           <form id="new-hospital-form" class="js-new-hospital-form hidden">
-            <input type="text" class="js-new-hospital-entry" placeholder="hospital name"></br>
-            <input type="text" class="js-new-hospital-location" placeholder="location"></br>
-            <button type="submit">Add Hospital</button>
+            <label for="js-new-hospital-entry"><span>Hospital Name:</span>
+              <input type="text" class="js-new-hospital-entry"></br>
+              <label for="js-new-hospital-location"><span>Hospital Location:</span>
+                <input type="text" class="js-new-hospital-location"></br>
+                <button type="submit">Add Hospital</button>
           </form>
         </section>
       </div>

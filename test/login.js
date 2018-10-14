@@ -5,23 +5,23 @@ const chaiHttp = require('chai-http');
 const jwt = require('jsonwebtoken');
 
 const { app, runServer, closeServer } = require('../server');
-const User  = require('../models/user');
+const User = require('../models/user');
 const { JWT_SECRET } = require('../config');
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('Auth endpoints', function () {
+describe('Auth endpoints', function() {
   const username = 'exampleUser';
   const password = 'examplePass';
   const fullName = 'Example';
 
-  before(function () {
+  before(function() {
     return runServer(TEST_DATABASE_URL);
   });
 
-  after(function () {
+  after(function() {
     return closeServer();
   });
 
@@ -35,12 +35,12 @@ describe('Auth endpoints', function () {
     );
   });
 
-  afterEach(function () {
+  afterEach(function() {
     return User.remove({});
   });
 
-  describe('/auth/login', function () {
-    it('Should return a valid auth token', function () {
+  describe('/auth/login', function() {
+    it('Should return a valid auth token', function() {
       return chai
         .request(app)
         .post('/auth/login')
@@ -53,7 +53,6 @@ describe('Auth endpoints', function () {
           const payload = jwt.verify(token, JWT_SECRET, {
             algorithm: ['HS256']
           });
-        
         });
     });
   });

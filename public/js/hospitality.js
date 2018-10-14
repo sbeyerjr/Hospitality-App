@@ -32,8 +32,11 @@ const hospitality = (function() {
     );
     $('.js-patients-list').html(patientsList);
 
-    const hospitalList = generateHospitalList(store.hospitals, store.currentQuery);
-    $(".js-hospital-list").html(hospitalList);
+    const hospitalList = generateHospitalList(
+      store.hospitals,
+      store.currentQuery
+    );
+    $('.js-hospital-list').html(hospitalList);
 
     const hospitalSelect = generateHospitalSelect(store.hospitals);
     $('.js-patient-hospital-entry').html(hospitalSelect);
@@ -79,17 +82,23 @@ const hospitality = (function() {
   }
   function generateHospitalList(list, currQuery) {
     const showAllItem = `
-      <li data-id="" class="js-hospital-item ${!currQuery.hospitalId ? "active" : ""}">
+      <li data-id="" class="js-hospital-item ${
+        !currQuery.hospitalId ? 'active' : ''
+      }">
         <a href="#" class="name js-hospital-link">All</a>
       </li>`;
 
-    const listItems = list.map(item => `
-      <li data-id="${item.id}" class="js-hospital-item ${currQuery.hospitalId === item.id ? "active" : ""}">
+    const listItems = list.map(
+      item => `
+      <li data-id="${item.id}" class="js-hospital-item ${
+        currQuery.hospitalId === item.id ? 'active' : ''
+      }">
         <a href="#" class="name js-hospital-link">${item.name}</a>
         <button class="removeBtn js-hospital-delete">X</button>
-      </li>`);
+      </li>`
+    );
 
-    return [showAllItem, ...listItems].join("");
+    return [showAllItem, ...listItems].join('');
   }
 
   function generateHospitalSelect(list) {
@@ -97,7 +106,6 @@ const hospitality = (function() {
       item => `<option value="${item.name}">${item.name}</option>`
     );
     return '<option value="">Select Hospital:</option>' + hospitals.join('');
-
   }
   /**
    * HELPERS
@@ -242,7 +250,7 @@ const hospitality = (function() {
   }
 
   function watchNewHospitalClick() {
-    $('.js-new-hospital').on('click', event => {
+    $('.js-add-hospital-btn').on('click', event => {
       $('.js-new-hospital-form').removeClass('hidden');
       $('.js-new-hospital').addClass('hidden');
     });
@@ -344,12 +352,13 @@ const hospitality = (function() {
 
           return Promise.all([
             api.search('/patients'),
-            api.search('/hospitals')]);
+            api.search('/hospitals')
+          ]);
         })
         .then(([patients, hospitals]) => {
           store.patients = patients;
           store.hospitals = hospitals;
-          
+
           render();
         })
         .catch(handleErrors);

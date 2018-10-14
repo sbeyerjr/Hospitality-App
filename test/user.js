@@ -49,16 +49,13 @@ describe('Users API resource', function() {
   });
 
   describe('POST endpoint', function() {
-   
     it('should add a new user', function() {
       const newUser = generateUserData();
-      
+
       return chai
         .request(app)
         .post('/users')
         .send(newUser);
-        
-
     });
   });
-  });
+});

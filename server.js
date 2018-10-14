@@ -29,7 +29,7 @@ app.use('*', (req, res) => {
 
 let server;
 
-function runServer (databaseURL, port = PORT) {
+function runServer(databaseURL, port = PORT) {
   return new Promise((resolve, reject) => {
     mongoose.connect(
       databaseURL,
@@ -39,7 +39,9 @@ function runServer (databaseURL, port = PORT) {
         }
         server = app
           .listen(port, () => {
-            console.log(`Your app is listening on port ${port}! Database URL is ${databaseURL}`);
+            console.log(
+              `Your app is listening on port ${port}! Database URL is ${databaseURL}`
+            );
             resolve();
           })
           .on('error', err => {
@@ -87,5 +89,4 @@ if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
-
-module.exports = {app, runServer, closeServer};
+module.exports = { app, runServer, closeServer };

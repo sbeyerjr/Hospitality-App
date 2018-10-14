@@ -1,16 +1,14 @@
-"use strict";
+'use strict';
 
-const store = (function () {
-
+const store = (function() {
   return {
     hospitals: [],
     patients: [],
 
     currentPatient: {},
     currentQuery: {
-      searchTerm: "",
+      searchTerm: ''
     },
-    authToken: ""
+    authToken: ''
   };
-
-}());
+})();

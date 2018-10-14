@@ -47,14 +47,11 @@ describe('Patients API resource', function() {
   });
 
   beforeEach(function() {
-    return User.create(testUser)
-    .then(_user => {
+    return User.create(testUser).then(_user => {
       user = _user;
       token = jwt.sign({ user }, JWT_SECRET, { subject: user.username });
 
-      return Promise.all([
-        seedPatientData()
-      ]);
+      return Promise.all([seedPatientData()]);
     });
   });
 
@@ -74,13 +71,10 @@ describe('Patients API resource', function() {
         .get('/patients')
         .set('Authorization', `Bearer ${token}`)
         .then(function(_res) {
-          
           res = _res;
           console.log(res.body);
           expect(res).to.have.status(200);
-          
         });
-       
     });
 
     it('should return patients with right fields', function() {
@@ -94,7 +88,6 @@ describe('Patients API resource', function() {
         .then(function(res) {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          
 
           res.body.forEach(function(patient) {
             expect(patient).to.be.a('object');
@@ -108,9 +101,7 @@ describe('Patients API resource', function() {
             );
           });
           resPatient = res.body[0];
-          
         });
-        
     });
   });
   describe('POST endpoint', function() {
@@ -165,8 +156,10 @@ describe('Patients API resource', function() {
       return Patient.findOne()
         .then(function(_patient) {
           patient = _patient;
-          return chai.request(app).delete(`/patients/${patient.id}`)
-          .set('Authorization', `Bearer ${token}`);
+          return chai
+            .request(app)
+            .delete(`/patients/${patient.id}`)
+            .set('Authorization', `Bearer ${token}`);
         })
         .then(function(res) {
           expect(res).to.have.status(204);
