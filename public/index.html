@@ -98,15 +98,15 @@
     </section>
 
     <div class="row">
-      <div class="col-6 add-patients hidden">
+      <div class="col-6 add-patients">
         <section>
-          <div class="add-patient" r>
+          <div class="add-patient hidden" r>
             <h2>Add a Patient</h2>
             <form id="new-note-form" class="js-start-new-patient-form hidden">
               <button type="submit" class="js-add-new-patient-btn">Add New Patient +</button>
             </form>
           </div>
-          <form id="patient-edit-form" class="js-patient-edit-form">
+          <form id="patient-edit-form" class="js-patient-edit-form hidden">
             <label for="js-patient-first-name-entry"><span>First Name:</span>
               <input type="text" name="patient-first-name" class="js-patient-first-name-entry" required placeholder="First Name"></br>
               <label for="js-patient-last-name-entry"><span>Last Name:</span>
@@ -132,8 +132,10 @@
           </form>
         </section>
       </div>
-      <div class="col-4 my-patients hidden">
+      <div class="col-4">
+        <div class="my-patients hidden">
         <h2>My Patients</h2>
+        </div>
         <div class="js-patients-list"></div>
       </div>
     </div>
