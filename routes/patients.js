@@ -35,6 +35,7 @@ router.post('/', jsonParser, (req, res) => {
     roomNumber: req.body.roomNumber,
     wantsVisitors: req.body.wantsVisitors,
     notes: req.body.notes,
+    hospital: req.body.hospital,
     userId: req.user._id
   })
 
@@ -63,7 +64,8 @@ router.put('/:id', jsonParser, (req, res) => {
     'lastName',
     'roomNumber',
     'notes',
-    'wantsVisitors'
+    'wantsVisitors',
+    'hospital'
   ];
 
   updateableFields.forEach(field => {

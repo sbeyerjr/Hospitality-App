@@ -64,6 +64,7 @@ const hospitality = (function() {
               : 'does not want visitors'
           }</span></br>
           <span>Notes: ${item.notes}</span></br>
+          <span>Hospital: ${item.hospital}</span></br>
           <button class="removeBtn js-patient-delete-button">X</button>
           <div class="metadata">
             </div>
@@ -87,12 +88,11 @@ const hospitality = (function() {
   }
 
   function generateHospitalSelect(list) {
-    // const hospitals = list.map(
-    //   item => `<option value="${item.name}">${item.name}</option>`
-    // );
-    // console.log(hospitals);
-    // return '<option value="">Select Hospital:</option>' + hospitals.join('');
-    return api.details('/hospitals');
+    const hospitals = list.map(
+      item => `<option value="${item.name}">${item.name}</option>`
+    );
+    return '<option value="">Select Hospital:</option>' + hospitals.join('');
+
   }
   /**
    * HELPERS
@@ -136,6 +136,7 @@ const hospitality = (function() {
       const newRoomNumber = $('.js-room-number-entry');
       const newWantsVisitors = $('.js-wants-visitors');
       const newNote = $('.js-patient-notes-entry');
+      const newHospital = $('.js-patient-hospital-entry');
       const editForm = $(event.currentTarget);
       const patientObj = {
         id: store.currentPatient.id,
@@ -144,7 +145,7 @@ const hospitality = (function() {
         roomNumber: editForm.find('.js-room-number-entry').val(),
         wantsVisitors: editForm.find('input[name=visitors]:checked').val(),
         notes: editForm.find('.js-patient-notes-entry').val(),
-        hospitalId: editForm.find('.js-patient-hospital-entry').val()
+        hospital: editForm.find('.js-patient-hospital-entry').val()
       };
 
       if (store.currentPatient.id) {
@@ -171,6 +172,7 @@ const hospitality = (function() {
             newRoomNumber.val('');
             newWantsVisitors.val('');
             newNote.val('');
+            newHospital.val('');
             return api.search('/patients', store.currentQuery);
           })
           .then(response => {
@@ -335,12 +337,14 @@ const hospitality = (function() {
           store.authorized = true;
           loginForm[0].reset();
 
-          return Promise.all([api.search('/patients')]);
+          return Promise.all([
+            api.search('/patients'),
+            api.search('/hospitals')]);
         })
-        .then(([patients, hospitals, tags]) => {
+        .then(([patients, hospitals]) => {
           store.patients = patients;
           store.hospitals = hospitals;
-          store.tags = tags;
+          
           render();
         })
         .catch(handleErrors);

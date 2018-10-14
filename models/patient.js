@@ -8,7 +8,7 @@ const patientSchema = mongoose.Schema({
   roomNumber: { type: String, required: false },
   wantsVisitors: { type: Boolean, required: false },
   notes: { type: String, required: false },
-  hospital: { type: mongoose.Schema.Types.ObjectId, ref: 'Hospital' },
+  hospital: { type: String, required: false },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
@@ -20,6 +20,7 @@ patientSchema.methods.serialize = function() {
     roomNumber: this.roomNumber,
     wantsVisitors: this.wantsVisitors,
     notes: this.notes,
+    hospital: this.hospital,
     userId: this.userId
   };
 };
