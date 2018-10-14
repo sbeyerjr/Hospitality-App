@@ -21,11 +21,12 @@ An app to help individuals manage their hospital visitations.
 # API
 
 <h2>Client</h2>
-HTML5, CSS, JavaScript ES6
-jQuery for DOM manipulation, event listening & AJAX
-Google Fonts & Font Awesome for styling
+<ul>
+ <li>HTML5, CSS, JavaScript ES6</li>
+ <li>jQuery for DOM manipulation</li>
+ <li>Google Fonts & Font Awesome</li>
+</ul>
 <h2>Server</h2>
-Node.js & Express for web server & API
-MongoDB & Mongoose for data persistence & modeling
-ESLint, Mocha & Chai for linting, unit & integration testing
-Travis CI, Heroku & mLab for deployment
+<li>Node.js & Express for web server & API</li>
+<li>MongoDB & Mongoose for data persistence & modeling</li>
+<li>Travis CI, Heroku & mLab for deployment</li>
