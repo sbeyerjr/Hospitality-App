@@ -46,7 +46,7 @@ body {
     url(http://stevenbeyerjr.com/img/hospital.jpg);
   background-size: cover;
   font-family: 'Krub', sans-serif;
-  z-index: 2;
+  z-index: 24;
 }
 
 .signup-login fieldset {

@@ -34,8 +34,16 @@ function listenNewPatient() {
     $('.js-start-new-patient-form').addClass('hidden');
   });
 }
+function removeHiddenClass() {
+  $('.js-login').on('click', event => {
+    $('.add-patient').removeClass('hidden');
+    $('.js-patient-edit-form').removeClass('hidden');
+    $('.my-patients').removeClass('hidden');
+  });
+}
 $(listenLogin);
 $(listenRegister);
 $(listenCancelRegister);
 $(listenCancelLogin);
 $(listenNewPatient);
+$(removeHiddenClass);
