@@ -2,6 +2,8 @@
 
 An app to help individuals manage their hospital visitations.
 
+See a demo of the app --> <a href="https://quiet-wildwood-91303.herokuapp.com/">Click Here</a>
+
 # Features
  - The app allows users to create a list of patients they have visited in the hospital
  - Users can create a new hospital
