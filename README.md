@@ -17,7 +17,7 @@ See a demo of the app --> <a href="https://quiet-wildwood-91303.herokuapp.com/">
 <li>Create a New Patient</li>
 <img src="http://stevenbeyerjr.com/img/addpatient.png"> </br>
 <li>List of Patients</li>
-<img src="http://stevenbeyerjr.com/img/patient.png">
+<img src="http://stevenbeyerjr.com/img/patients.png">
 </ul>
 
 # API
