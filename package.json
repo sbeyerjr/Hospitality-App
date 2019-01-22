@@ -2,7 +2,7 @@
   "name": "hospitality",
   "version": "1.0.0",
   "description": "An app to help people keep up with hospital visitations.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "mocha --exit"
