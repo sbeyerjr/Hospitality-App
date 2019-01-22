@@ -7,6 +7,9 @@
     "start": "node server.js",
     "test": "mocha --exit"
   },
+  "engines": {
+    "node": "10.9.0"
+  },
   "author": "Steven Beyer",
   "license": "ISC",
   "dependencies": {
