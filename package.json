@@ -1,7 +1,7 @@
 {
   "name": "hospitality",
   "version": "1.0.0",
-  "description": "An app that keeps track of patients in a hospital",
+  "description": "An app that allows users to keep track of patients in a hospital",
   "main": "server.js",
   "directories": {
     "test": "test"
@@ -23,8 +23,8 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.4",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
@@ -37,6 +37,9 @@
     "type": "git",
     "url": "git+https://github.com/sbeyerjr/Hospitality-App.git"
   },
+  "keywords": [
+    "Hospital"
+  ],
   "author": "Steven Beyer",
   "license": "ISC",
   "bugs": {
