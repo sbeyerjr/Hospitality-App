@@ -1,38 +1,46 @@
 {
   "name": "hospitality",
   "version": "1.0.0",
-  "description": "An app to help people keep up with hospital visitations.",
+  "description": "An app that keeps track of patients in a hospital",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "test": "mocha --exit"
+  "directories": {
+    "test": "test"
   },
-  "engines": {
-    "node": "10.3.0"
-  },
-  "author": "Steven Beyer",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
-    "express": "^4.14.0",
+    "express": "^4.16.3",
     "express-validator": "^5.3.0",
     "faker": "^4.1.0",
     "json-parser": "^1.1.5",
     "jsonwebtoken": "^8.3.0",
     "mongo": "^0.1.0",
     "mongoose": "^4.13.17",
-    "morgan": "^1.7.0",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.4",
     "passport": "^0.3.2",
-    "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-http": "^4.0.0",
     "mocha": "^5.2.0"
-  }
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbeyerjr/Hospitality-App.git"
+  },
+  "author": "Steven Beyer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sbeyerjr/Hospitality-App/issues"
+  },
+  "homepage": "https://github.com/sbeyerjr/Hospitality-App#readme"
 }
