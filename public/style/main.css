@@ -1,6 +1,6 @@
 body {
   background: linear-gradient(rgba(24, 33, 124, 0.8), rgba(24, 33, 124, 0.8)),
-    url(/public/img/hospital.jpg);
+    url(/img/hospital.jpg);
   background-size: cover;
   font-family: 'Krub', sans-serif;
 }
@@ -43,7 +43,7 @@ body {
   right: 0;
   bottom: 0;
   background: linear-gradient(rgba(24, 33, 124, 0.8), rgba(24, 33, 124, 0.8)),
-    url(/public/img/hospital.jpg);
+    url(/img/hospital.jpg);
   background-size: cover;
   font-family: 'Krub', sans-serif;
   z-index: 24;
